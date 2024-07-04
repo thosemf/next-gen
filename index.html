@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Peserta Event: Next Generation IT Solutions for Your Organizations 2024</title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+	<style>
+
+		.leaflet-container {
+			height: 400px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
+        }
+
+
+
+.map {
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+}
+
+
+	</style>
+<style type="text/css">
+        body { font-family: Calibri, Helvetica, Arial, sans-serif; }
+        h3 { font-family: Cambria,"Times New Roman",serif; }
+        #paragraf2 { font-family: Georgia, serif; }
+    </style>
+
+</head>
+<body>
+<p><font type=calibri>Peserta Event: Next Generation IT Solutions for Your Organizations 2024</font></p>
+
+
+<div id='map' align='center'>
+
+
+</div>
+
+<script>
+	var greenIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var redIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var orangeIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var yellowIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var violetIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var greyIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var goldIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var blackIcon = new L.Icon({
+		iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-black.png',
+		shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var pinkIcon = new L.Icon({
+		iconUrl: 'images/marker-icon-2x-pink.png',
+		shadowUrl: 'images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+	var cyanIcon = new L.Icon({
+		iconUrl: 'images/marker-icon-2x-cyan.png',
+		shadowUrl: 'images/marker-shadow.png',
+		iconSize: [25, 41],
+		iconAnchor: [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize: [41, 41]
+	});
+
+
+
+	const cities = L.layerGroup();
+
+	const	SMKN1Binangun	=  L.marker([-7.664948,109.2016233], {icon: goldIcon}).bindPopup('SMKN 1 Binangun').addTo(cities);
+	const	SMKYPEKROYA	=  L.marker([-7.6343345,109.2494158],{icon: goldIcon}).bindPopup('SMK YPE KROYA').addTo(cities);
+	const	SMKTAMTAMA1SIDAREJA	=  L.marker([-7.485580,108.799865],{icon: goldIcon}).bindPopup('SMK TAMTAMA 1 SIDAREJA').addTo(cities);
+	const	PoltekkesKemenkesSemarangKampus7Baturradenpurwokerto	=  L.marker([-7.309923,109.236939],{icon: goldIcon}).bindPopup('Poltekkes Kemenkes Semarang-Kampus7 Baturraden-purwokerto').addTo(cities);
+	const	RumahSakitHarapanSehatBumiayu	=  L.marker([-7.2681263,109.0212239],{icon: greenIcon}).bindPopup('Rumah Sakit Harapan Sehat Bumiayu').addTo(cities);
+	const	PTRAFFAMAJUBAROKAH	=  L.marker([-7.3006461,108.7535951], {icon: orangeIcon}).bindPopup('PT.RAFFA MAJU BAROKAH').addTo(cities);
+	const	SMKN2CILACAP	=  L.marker([-7.7278521,109.0151829], {icon: goldIcon}).bindPopup('SMKN 2 CILACAP').addTo(cities);
+	const	UniversitasAlIrsyadCilacap 	=  L.marker([-7.71265,109.0162814], {icon: goldIcon}).bindPopup('Universitas Al-Irsyad Cilacap').addTo(cities);
+	const	SMKYOSSUDARSOKAWUNGANTEN 	=  L.marker([-7.5864463,108.9129902], {icon: goldIcon}).bindPopup('SMK YOS SUDARSO KAWUNGANTEN').addTo(cities);
+	const	RSIbanjarnegara  	=  L.marker([-7.401666,109.613154], {icon: greenIcon}).bindPopup('RSI Banjarnegara').addTo(cities);
+	const	solusibangunindonesia  	=  L.marker([-7.6878249,109.0197463], {icon: orangeIcon}).bindPopup('IT/PT. Solusi Bangun Indonesia').addTo(cities);
+	const	RSuaghisnasidareja  	=  L.marker([-7.4851475,108.7973839], {icon: greenIcon}).bindPopup('RSu Aghisna Sidareja').addTo(cities);
+	const	bnikccilacap  	=  L.marker([-7.737096,109.0072938], {icon: orangeIcon}).bindPopup('PT Bank Negara Indonesia ( Persero ) Tbk KC Cilacap').addTo(cities);
+	const	rspkuMuhammadiyahsruweng 	=  L.marker([-7.6627052,109.6067205], {icon: greenIcon}).bindPopup('RS PKU MUHAMMADIYAH SRUWENG').addTo(cities);
+	const	rspkumuhammmadiyahgombong 	=  L.marker([-7.6087992,109.4998212], {icon: greenIcon}).bindPopup('RS PKU Muhammadiyah Gombong-Kebumen').addTo(cities);
+	const	rsupermatamedikakebumen 	=  L.marker([-7.6757633,109.6650446], {icon: greenIcon}).bindPopup('RSU PERMATA MEDIKA KEBUMEN').addTo(cities);
+	const	smkyossudarsojeruklegi 	=  L.marker([-7.6183923,109.0188351], {icon: goldIcon}).bindPopup('SMK Yos Sudarso Jeruklegi').addTo(cities);
+	const	rsuannimah 	=  L.marker([-7.5180652,109.0596968], {icon: greenIcon}).bindPopup('RSU An Nimah').addTo(cities);
+	const	rsiFatimahcilacap 	=  L.marker([-7.6922915,109.0224446], {icon: greenIcon}).bindPopup('RSI Fatimah Cilacap').addTo(cities);
+	const	stmikMuhammadiyahpeguyanganbrebes 	=  L.marker([-7.2893101,109.0274198], {icon: goldIcon}).bindPopup('STMIK Muhammadiyah Paguyangan Brebes').addTo(cities);
+	const	cvsatrigemilang  	=  L.marker([-7.381724,109.2501214], {icon: orangeIcon}).bindPopup('CV SATRIA GEMILANG').addTo(cities);
+	const	Dhimasfo  	=  L.marker([-7.3859901,109.2526443], {icon: orangeIcon}).bindPopup('Dhymas Indo Tama').addTo(cities);
+	const	LptsiuniversitasjendralSoedirman  	=  L.marker([-7.4038058,109.2461354], {icon: goldIcon}).bindPopup('Lptsi Universitas Jendral Soedirman').addTo(cities);
+
+
+    
+	const mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+	const mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+
+	const streets = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+
+	const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	});
+
+	const map = L.map('map', {
+		center: [-7.3648688,109.9015583],
+		zoom: 8.5,
+		layers: [osm, cities]
+	});
+
+	const baseLayers = {
+		'OpenStreetMap': osm,
+		'Streets': streets
+	};
+
+	const overlays = {
+		'Cities': cities,
+		"layer1": layer1,
+		"layer2": layer2,
+		"layer3": layer3,
+		"layer4": layer4
+	};
+
+	const layerControl = L.control.layers(baseLayers, overlays).addTo(map);
+
+	const parks = L.layerGroup([crownHill, rubyHill]);
+
+	const satellite = L.tileLayer(mbUrl, {id: 'mapbox/satellite-v9', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+	layerControl.addBaseLayer(satellite, 'Satellite');
+	layerControl.addOverlay(parks, 'Parks');
+</script>
+
+
+
+</body>
+</html>
